@@ -4,7 +4,8 @@ import SelectTripType from './SelectTripType'
 
 const tripTypeOptions = [
   { label: 'One-way', value: 'oneway' },
-  { label: 'Round trip', value: 'roundtrip' },
+  { label: 'Round-trip', value: 'roundtrip' },
+  { label: 'Multi-city', value: 'multicity' },
 ]
 
 const meta: Meta<typeof SelectTripType> = {
@@ -23,7 +24,7 @@ export const Default: Story = {
     return (
       <SelectTripType
         value={value}
-        onChange={setValue}
+        onChange={(val) => setValue(val)}
         options={tripTypeOptions}
       />
     )
