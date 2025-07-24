@@ -1,46 +1,58 @@
 import {
-  FormControl,
-  InputLabel,
   MenuItem,
   Select as MUISelect,
+  type SelectChangeEvent,
+  type SelectProps,
 } from '@mui/material'
-import type { SelectProps as MUISelectProps, SelectChangeEvent } from '@mui/material'
-
+import type { ReactNode } from 'react'
 
 type Option<T extends string | number = string> = {
-  label: string
+  label: ReactNode
   value: T
 }
 
-interface SelectProps<T extends string | number = string> extends Omit<MUISelectProps<T>, 'value' | 'onChange'> {
-  label: string
+interface Props<T extends string | number = string>
+  extends Omit<SelectProps<T>, 'value' | 'onChange'> {
   value: T
   onChange: (value: T) => void
   options: Option<T>[]
+  placeholder?: string
 }
 
 const Select = <T extends string | number = string>({
-  label,
   value,
   onChange,
   options,
+  placeholder,
   ...rest
-}: SelectProps<T>) => {
+}: Props<T>) => {
   const handleChange = (event: SelectChangeEvent<T>) => {
     onChange(event.target.value as T)
   }
 
   return (
-    <FormControl fullWidth size="small">
-      <InputLabel>{label}</InputLabel>
-      <MUISelect value={value} onChange={handleChange} label={label} {...rest}>
-        {options.map((opt) => (
-          <MenuItem key={opt.value} value={opt.value}>
-            {opt.label}
-          </MenuItem>
-        ))}
-      </MUISelect>
-    </FormControl>
+    <MUISelect
+      value={value}
+      onChange={handleChange}
+      variant="standard"
+      displayEmpty
+      disableUnderline
+      renderValue={(selected) =>
+        selected === '' ? <span style={{ color: '#9aa0a6' }}>{placeholder}</span> : selected
+      }
+      {...rest}
+    >
+      {placeholder && (
+        <MenuItem disabled value="">
+          {placeholder}
+        </MenuItem>
+      )}
+      {options.map((opt) => (
+        <MenuItem key={opt.value} value={opt.value}>
+          {opt.label}
+        </MenuItem>
+      ))}
+    </MUISelect>
   )
 }
 

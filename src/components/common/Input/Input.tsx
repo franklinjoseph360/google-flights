@@ -1,7 +1,14 @@
-import { TextField, type TextFieldProps } from '@mui/material'
+import { Input as MUIInput, type InputBaseProps } from '@mui/material'
 
-const Input = (props: TextFieldProps) => {
-  return <TextField size="small" fullWidth {...props} />
+const Input = (props: InputBaseProps) => {
+  return (
+    <MUIInput
+      fullWidth
+      disableUnderline
+      placeholder="Enter value"
+      {...props}
+    />
+  )
 }
 
-export default Input;
+export default Input
