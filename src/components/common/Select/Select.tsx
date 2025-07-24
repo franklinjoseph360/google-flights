@@ -45,6 +45,23 @@ const Select = <T extends string | number = string>({
         const selectedOption = options.find((opt) => opt.value === selected)
         return selectedOption ? selectedOption.label : selected
       }}
+      sx={{
+        backgroundColor: '#202124',
+        borderRadius: '10px',
+        px: 2,
+        py: 1.5,
+        color: 'white',
+        '&.Mui-focused': {
+          outline: 'none',
+          boxShadow: 'none',
+          backgroundColor: '#202124',
+        },
+        '&:focus': {
+          outline: 'none',
+          boxShadow: 'none',
+          backgroundColor: '#202124',
+        },
+      }}
       {...rest}
     >
       {placeholder && (
