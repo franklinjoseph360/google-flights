@@ -1,5 +1,7 @@
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp'
 import GroupIcon from '@mui/icons-material/Group'
-import { Box, Button, Popover, Typography } from '@mui/material'
+import { Box, Button, Popover, Typography, IconButton } from '@mui/material'
 import { useState } from 'react'
 
 interface PassengerCounts {
@@ -48,12 +50,25 @@ export default function SelectPassengerCount({ value, onChange }: Props) {
       { label: 'Infants', key: 'infantsOnLap', sub: 'On lap' },
     ]
 
-
   return (
     <>
-      <Box display="flex" alignItems="center" gap={1}>
-        <GroupIcon />
-        <Button onClick={handleOpen} variant="contained">
+      <Box display="flex" alignItems="center" gap={0}>
+        <GroupIcon sx={{ color: '#fff' }} />
+        <Button
+          onClick={handleOpen}
+          variant="contained"
+          disableElevation
+          sx={{
+            backgroundColor: '#202124',
+            borderRadius: '16px',
+            paddingLeft: '10px',
+            color: '#fff',
+            textTransform: 'none',
+            '&:hover': { backgroundColor: '#202124' },
+            '&:focus': { outline: 'none' },
+          }}
+          endIcon={open ? <ArrowDropUpIcon sx={{ color: '#fff' }} /> : <ArrowDropDownIcon sx={{ color: '#fff' }} />}
+        >
           {totalPassengers} Passenger{totalPassengers !== 1 ? 's' : ''}
         </Button>
       </Box>
@@ -63,24 +78,66 @@ export default function SelectPassengerCount({ value, onChange }: Props) {
         anchorEl={anchorEl}
         onClose={handleClose}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+        PaperProps={{
+          sx: {
+            backgroundColor: '#2c2c2e',
+            color: '#fff',
+            borderRadius: '8px',
+          },
+        }}
       >
         <Box p={2} display="flex" flexDirection="column" gap={2} width={300}>
           {categories.map((cat) => (
             <Box key={cat.key} display="flex" justifyContent="space-between" alignItems="center">
               <Box>
                 <Typography>{cat.label}</Typography>
-                {cat.sub && <Typography fontSize={12} color="gray">{cat.sub}</Typography>}
+                {cat.sub && (
+                  <Typography fontSize={12} color="#b0b0b0">
+                    {cat.sub}
+                  </Typography>
+                )}
               </Box>
               <Box display="flex" alignItems="center" gap={1}>
-                <Button onClick={() => handleChange(cat.key, -1)} disabled={value[cat.key] === 0}>−</Button>
+                <IconButton
+                  size="small"
+                  onClick={() => handleChange(cat.key, -1)}
+                  disabled={value[cat.key] === 0}
+                  sx={{
+                    backgroundColor: '#3c3c3e',
+                    color: '#fff',
+                    '&:hover': { backgroundColor: '#4a4a4d' },
+                    borderRadius: 1,
+                    width: 32,
+                    height: 32,
+                  }}
+                >
+                  −
+                </IconButton>
                 <Typography>{value[cat.key]}</Typography>
-                <Button onClick={() => handleChange(cat.key, 1)}>+</Button>
+                <IconButton
+                  size="small"
+                  onClick={() => handleChange(cat.key, 1)}
+                  sx={{
+                    backgroundColor: '#3c3c3e',
+                    color: '#fff',
+                    '&:hover': { backgroundColor: '#4a4a4d' },
+                    borderRadius: 1,
+                    width: 32,
+                    height: 32,
+                  }}
+                >
+                  +
+                </IconButton>
               </Box>
             </Box>
           ))}
-          <Box display="flex" justifyContent="space-between">
-            <Button onClick={handleClose} color="inherit">Cancel</Button>
-            <Button onClick={handleClose}>Done</Button>
+          <Box display="flex" justifyContent="space-between" mt={1}>
+            <Button onClick={handleClose} sx={{ color: '#8ab4f8' }}>
+              Cancel
+            </Button>
+            <Button onClick={handleClose} sx={{ color: '#8ab4f8' }}>
+              Done
+            </Button>
           </Box>
         </Box>
       </Popover>

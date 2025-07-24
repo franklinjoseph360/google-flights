@@ -1,3 +1,5 @@
+// SelectPassengerCount.stories.tsx
+
 import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 import SelectPassengerCount from './SelectPassengerCount'
@@ -23,7 +25,7 @@ export const Default: Story = {
     return (
       <SelectPassengerCount
         value={value}
-        onChange={(val) => setValue(val)}
+        onChange={setValue}
       />
     )
   },
