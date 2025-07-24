@@ -26,7 +26,7 @@ const Select = <T extends string | number = string>({
   placeholder,
   ...rest
 }: Props<T>) => {
-  const handleChange = (event: SelectChangeEvent<T>) => {
+  const handleChange = (event: SelectChangeEvent<T>, _child: ReactNode) => {
     onChange(event.target.value as T)
   }
 
@@ -37,9 +37,14 @@ const Select = <T extends string | number = string>({
       variant="standard"
       displayEmpty
       disableUnderline
-      renderValue={(selected) =>
-        selected === '' ? <span style={{ color: '#9aa0a6' }}>{placeholder}</span> : selected
-      }
+      renderValue={(selected) => {
+        if (selected === '') {
+          return <span style={{ color: '#9aa0a6' }}>{placeholder}</span>
+        }
+
+        const selectedOption = options.find((opt) => opt.value === selected)
+        return selectedOption ? selectedOption.label : selected
+      }}
       {...rest}
     >
       {placeholder && (
