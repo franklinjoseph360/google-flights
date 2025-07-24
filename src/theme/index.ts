@@ -120,6 +120,32 @@ const theme = createTheme({
                 },
             },
         },
+        MuiAutocomplete: {
+            styleOverrides: {
+                root: {
+                    backgroundColor: '#2b2b2b',
+                    color: '#fff',
+                    borderRadius: 6,
+                    padding: '0px 2px',
+                },
+                inputRoot: {
+                    padding: '8px 12px !important',
+                },
+                popupIndicator: {
+                    color: '#aaa',
+                },
+                option: {
+                    fontSize: '14px',
+                    '&[aria-selected="true"]': {
+                        backgroundColor: '#3c4043',
+                    },
+                    '&:hover': {
+                        backgroundColor: '#303134',
+                    },
+                },
+            },
+        },
+
     },
 })
 
