@@ -2,6 +2,7 @@ import { Box, IconButton } from '@mui/material'
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz'
 import { useState } from 'react'
 import Autocomplete from '../common/Autocomplete/Autocomplete'
+import type { AirportOption } from '../../features/FlightSearch/context/types'
 
 type Option = {
   label: string
@@ -11,7 +12,7 @@ type Option = {
 interface Props {
   from: Option | null
   to: Option | null
-  onChange: (field: 'from' | 'to', value: Option | null) => void
+  onChange: (field: 'from' | 'to', value: AirportOption) => void
   options: Option[]
 }
 
@@ -19,9 +20,11 @@ export default function SelectAirportFields({ from, to, onChange, options }: Pro
   const [_swapDirection, setSwapDirection] = useState(false)
 
   const handleSwap = () => {
-    onChange('from', to)
-    onChange('to', from)
-    setSwapDirection((prev) => !prev)
+    if (from && to) {
+      onChange('from', to)
+      onChange('to', from)
+      setSwapDirection((prev) => !prev)
+    }
   }
 
   return (
@@ -29,7 +32,9 @@ export default function SelectAirportFields({ from, to, onChange, options }: Pro
       <Box flex={1}>
         <Autocomplete
           value={from}
-          onChange={(_, val) => onChange('from', val)}
+          onChange={(_, val) => {
+            if (val) onChange('from', val)
+          }}
           options={options}
           placeholder="From"
         />
@@ -53,7 +58,9 @@ export default function SelectAirportFields({ from, to, onChange, options }: Pro
       <Box flex={1}>
         <Autocomplete
           value={to}
-          onChange={(_, val) => onChange('to', val)}
+          onChange={(_, val) => {
+            if (val) onChange('to', val)
+          }}
           options={options}
           placeholder="Where to?"
         />
