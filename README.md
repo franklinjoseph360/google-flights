@@ -1,69 +1,104 @@
-# React + TypeScript + Vite
+# ✈️ Google Flights Clone — Franklin Joseph
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive React-based Google Flights UI clone using RapidAPI for live flight data. Built with Material UI, modern state management using React Context + Reducer, and Storybook support for reusable component development.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 1. 🚀 How to Run the App
 
-## Expanding the ESLint configuration
+### Step 1: Setup Environment Variables
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Create a `.env` file in the root of your project and add your [RapidAPI](https://rapidapi.com/apiheya/api/sky-scrapper) key:
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```env
+VITE_RAPIDAPI_KEY=your-rapidapi-key-here
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Step 2: Install Dependencies
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
+
+### Step 3: Start Development Server
+
+```bash
+npm run dev
+```
+
+---
+
+## 2. 📚 Storybook for UI Components
+
+This project supports Storybook to isolate and test UI components.
+
+### Run Storybook:
+
+```bash
+npm run storybook
+```
+
+Visit: [http://localhost:6006](http://localhost:6006)
+
+---
+
+## 3. 📁 Project Structure
+
+### Structure Overview:
+
+```bash
+src/
+├── components/
+│   ├── common/                  # Shared UI components (e.g., Loader)
+│   ├── SearchButton/            # Individual functional components
+│   ├── SelectAirportFields/
+│   ├── SelectFlightDates/
+│   ├── SelectPassengerCount/
+│   ├── SelectSeatClass/
+│   └── SelectTripType/
+│
+├── features/
+│   └── FlightSearch/
+│       ├── components/
+│       │   ├── FlightResults/   # Search results (FlightCard, FlightResult)
+│       │   └── FlightSearch/    # Main flight form
+│       └── context/             # Contexts for search, airport, and results
+│
+├── services/                    # API service modules
+│   ├── airportSearchService.ts
+│   └── flightSearchService.ts
+│
+├── utils/                       # Utility functions and parsers
+│   ├── buildFlightSearchQuery.ts
+│   └── parseFlightResults.ts
+│
+├── theme/                       # MUI custom theme
+│   └── index.ts
+│
+├── index.ts                     # App bootstrap
+└── types.ts                     # Shared types (optional if extracted)
+```
+
+### ✅ Component Breakdown:
+
+- **Common Components**: Used across multiple places (e.g., GlowingLoader).
+- **Functional Components**: Domain-specific fields like `SelectTripType`, `SelectSeatClass`.
+- **Feature Components**: Grouped under `features/FlightSearch`, includes form + results.
+- **Context**: Search state managed in feature-scoped contexts using Context API + Reducer.
+- **Utils**: Parsing and query building logic abstracted for cleaner service layer.
+- **Theme**: Material UI theme centralization.
+
+---
+
+## 4. 👤 About Me
+
+**Franklin Joseph**  
+Senior Full Stack Engineer
+
+- 📞 Phone: +6582010864  
+- 📧 Email: franklinjoseph360@gmail.com  
+- 🌐 Portfolio: [https://franklinjoseph.dev](https://franklinjoseph.dev)
+
+---
+
+🛫 Built with ❤️ for UI, UX, and performance.
