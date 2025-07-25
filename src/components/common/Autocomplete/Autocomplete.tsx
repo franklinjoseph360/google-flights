@@ -35,6 +35,7 @@ const Autocomplete = <T extends Option>({
           {...params}
           variant="standard"
           placeholder={placeholder}
+          autoComplete="new-password"
           InputProps={{
             ...params.InputProps,
             disableUnderline: true,
