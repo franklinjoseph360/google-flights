@@ -10,14 +10,15 @@ import {
   ListItemText,
 } from '@mui/material'
 import { useState } from 'react'
+import type { SeatClass } from '../../features/FlightSearch/context/types'
 
-type Option = { label: string; value: string | number }
 
-interface Props {
-  value: string | number
-  onChange: (value: string | number) => void
-  options: Option[]
+type Props = {
+  value: SeatClass
+  onChange: (value: SeatClass) => void
+  options: { label: string; value: SeatClass }[]
 }
+
 
 export default function SelectSeatClass({ value, onChange, options }: Props) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
