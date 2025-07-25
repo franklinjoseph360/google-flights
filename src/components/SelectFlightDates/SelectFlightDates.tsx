@@ -2,24 +2,39 @@ import { Box } from '@mui/material'
 import DatePicker from '../common/DatePicker/DatePicker'
 import CustomDateRangePicker from '../common/CustomDateRangePicker/CustomDateRangePicker'
 
-interface Props {
-  tripType: 'oneway' | 'roundtrip' | 'multicity'
+type Props = {
+  tripType: string
   departureDate: Date | null
+  returnDate?: Date | null
   onDepartureChange: (date: Date | null) => void
+  onReturnChange: (date: Date | null) => void
 }
 
-export default function SelectFlightDates({
+const SelectFlightDates = ({
   tripType,
   departureDate,
+  returnDate,
   onDepartureChange,
-}: Props) {
+  onReturnChange,
+}: Props) => {
   return (
     <Box width="100%">
       {tripType === 'roundtrip' ? (
-        <CustomDateRangePicker />
+        <CustomDateRangePicker
+          startDate={departureDate}
+          endDate={returnDate || null}
+          onStartDateChange={onDepartureChange}
+          onEndDateChange={onReturnChange}
+        />
       ) : (
-        <DatePicker value={departureDate} onChange={onDepartureChange} placeholder="Departure Date" />
+        <DatePicker
+          value={departureDate}
+          onChange={onDepartureChange}
+          placeholder="Departure Date"
+        />
       )}
     </Box>
   )
 }
+
+export default SelectFlightDates
