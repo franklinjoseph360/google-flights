@@ -1,6 +1,8 @@
 export interface AirportOption {
   label: string
   value: string
+  skyId: string
+  entityId: string
 }
 
 export type PassengerCount = {
@@ -10,8 +12,20 @@ export type PassengerCount = {
   infantsInSeat: number
 }
 
+export type FlightResult = {
+  departureTime: string
+  arrivalTime: string
+  airlineName: string
+  duration: string
+  stops: string
+  emissions: string
+  emissionsTag: string
+  price: string
+}
+
+
 export type TripType = 'oneway' | 'roundtrip' | 'multicity'
-export type SeatClass = 'Economy' | 'Premium Economy' | 'Business' | 'First'
+export type SeatClass = 'economy' | 'premium_economy' | 'business' | 'first'
 
 export type FlightSearchState = {
   tripType: TripType

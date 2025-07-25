@@ -4,19 +4,15 @@ import { useState } from 'react'
 import Autocomplete from '../common/Autocomplete/Autocomplete'
 import type { AirportOption } from '../../features/FlightSearch/context/types'
 
-type Option = {
-  label: string
-  value: string
-}
-
 interface Props {
-  from: Option | null
-  to: Option | null
+  from: AirportOption | null
+  to: AirportOption | null
   onChange: (field: 'from' | 'to', value: AirportOption) => void
-  options: Option[]
+  options: AirportOption[]
+  onInputChange?: (query: string) => void
 }
 
-export default function SelectAirportFields({ from, to, onChange, options }: Props) {
+export default function SelectAirportFields({ from, to, onChange, options, onInputChange }: Props) {
   const [_swapDirection, setSwapDirection] = useState(false)
 
   const handleSwap = () => {
@@ -35,6 +31,7 @@ export default function SelectAirportFields({ from, to, onChange, options }: Pro
           onChange={(_, val) => {
             if (val) onChange('from', val)
           }}
+          onInputChange={(_, val) => onInputChange?.(val)}
           options={options}
           placeholder="From"
         />
@@ -61,6 +58,7 @@ export default function SelectAirportFields({ from, to, onChange, options }: Pro
           onChange={(_, val) => {
             if (val) onChange('to', val)
           }}
+          onInputChange={(_, val) => onInputChange?.(val)}
           options={options}
           placeholder="Where to?"
         />

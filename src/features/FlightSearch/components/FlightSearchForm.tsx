@@ -1,18 +1,24 @@
-import { Box, Stack, useMediaQuery, useTheme } from '@mui/material'
-import { useFlightSearchState, useFlightSearchDispatch } from '../context/context'
+import { Box, debounce, Stack, useMediaQuery, useTheme } from '@mui/material'
+import { useFlightSearchState, useFlightSearchDispatch } from '../context/flightSearch.context'
+import { useAirportSearchContext } from '../context/airportSearch.context'
 import SelectTripType from '../../../components/SelectTripType/SelectTripType'
 import SelectPassengerCount from '../../../components/SelectPassengerCount/SelectPassengerCount'
 import SelectSeatClass from '../../../components/SelectSeatClass/SelectSeatClass'
 import SelectAirportFields from '../../../components/SelectAirportFields/SelectAirportFields'
 import SelectFlightDates from '../../../components/SelectFlightDates/SelectFlightDates'
 import SearchButton from '../../../components/SearchButton/SearchButton'
+import { useFlightSearchResults } from '../context/flightSearchResult.context'
 import type { TripType, SeatClass, AirportOption } from '../context/types'
+import { useCallback, useMemo } from 'react'
 
 const FlightSearchForm = () => {
   const state = useFlightSearchState()
   const dispatch = useFlightSearchDispatch()
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))
+
+  const { searchAirports, airportOptions } = useAirportSearchContext();
+  const { searchFlightsNow, isLoading, error } = useFlightSearchResults();
 
   const {
     tripType,
@@ -23,6 +29,16 @@ const FlightSearchForm = () => {
     departureDate,
     returnDate,
   } = state
+
+  // Debounced handler for search input
+  const debouncedSearchAirports = useMemo(
+    () => debounce((query: string) => searchAirports(query), 300),
+    [searchAirports]
+  )
+
+  const handleAirportInputChange = useCallback((query: string) => {
+    if (query.length > 1) debouncedSearchAirports(query)
+  }, [debouncedSearchAirports])
 
   return (
     <Box sx={{ p: 2, borderRadius: 2, maxWidth: '100%', backgroundColor: '#202124', border: '1px solid transparent' }}>
@@ -49,13 +65,14 @@ const FlightSearchForm = () => {
               dispatch({ type: 'SET_SEAT_CLASS', payload: value })
             }
             options={[
-              { label: 'Economy', value: 'Economy' },
-              { label: 'Premium Economy', value: 'Premium Economy' },
-              { label: 'Business', value: 'Business' },
-              { label: 'First', value: 'First' },
+              { label: 'Economy', value: 'economy' },
+              { label: 'Premium Economy', value: 'premium_economy' },
+              { label: 'Business', value: 'business' },
+              { label: 'First', value: 'first' },
             ]}
           />
         </Stack>
+
         <Stack direction={isMobile ? 'column' : 'row'} spacing={2}>
           <Box flex={isMobile ? 1 : 7}>
             <SelectAirportFields
@@ -64,7 +81,8 @@ const FlightSearchForm = () => {
               onChange={(field: 'from' | 'to', value: AirportOption) =>
                 dispatch({ type: 'SET_AIRPORT_FIELD', payload: { field, value } })
               }
-              options={[]} // Provide actual options here
+              options={airportOptions}
+              onInputChange={handleAirportInputChange}
             />
           </Box>
           <Box flex={isMobile ? 1 : 3}>
@@ -82,23 +100,33 @@ const FlightSearchForm = () => {
           </Box>
         </Stack>
 
-
         <Box display="flex" justifyContent="center">
           <SearchButton
             label="Explore"
-            onClick={() =>
-              console.log('Search initiated with:', {
-                tripType,
-                from,
-                to,
-                departureDate,
-                returnDate,
-                passengerCount,
-                seatClass,
-              })
-            }
+            onClick={() => searchFlightsNow(state)}
           />
         </Box>
+        {error && (
+          <Box color="error.main" textAlign="center" mt={2}>
+            {error}
+          </Box>
+        )}
+
+        {isLoading && (
+          <Box
+            textAlign="center"
+            py={2}
+            sx={{
+              color: '#fff',
+              backgroundColor: '#2b2c2e',
+              borderRadius: 2,
+              fontSize: '1rem',
+              fontWeight: 500,
+            }}
+          >
+            Searching for the best flights...
+          </Box>
+        )}
       </Stack>
     </Box>
   )

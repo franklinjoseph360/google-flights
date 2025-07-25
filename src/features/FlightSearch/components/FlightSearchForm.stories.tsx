@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import FlightSearchForm from './FlightSearchForm'
-import { FlightSearchProvider } from '../context/context'
+import { FlightSearchProvider } from '../context/flightSearch.context'
 
 const meta: Meta<typeof FlightSearchForm> = {
   title: 'FlightSearch/FlightSearchForm',

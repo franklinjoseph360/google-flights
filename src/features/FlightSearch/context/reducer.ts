@@ -1,6 +1,6 @@
 import type { FlightSearchState, FlightSearchAction } from './types'
 
-export const initialState: FlightSearchState = {
+export const initialFlightSearchState: FlightSearchState = {
   tripType: 'oneway',
   passengerCount: {
     adults: 1,
@@ -8,13 +8,12 @@ export const initialState: FlightSearchState = {
     infantsOnLap: 0,
     infantsInSeat: 0,
   },
-  seatClass: 'Economy',
-  from: { label: 'New York (JFK)', value: 'JFK' },
-  to: { label: 'Los Angeles (LAX)', value: 'LAX' },
+  seatClass: 'economy',
+  from: null,
+  to: null,
   departureDate: new Date(),
   returnDate: null,
 }
-
 
 export function flightSearchReducer(
   state: FlightSearchState,
