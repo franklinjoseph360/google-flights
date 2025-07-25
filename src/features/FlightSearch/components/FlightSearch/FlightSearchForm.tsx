@@ -1,16 +1,18 @@
 import { Box, debounce, Stack, useMediaQuery, useTheme } from '@mui/material'
-import { useFlightSearchState, useFlightSearchDispatch } from '../../context/flightSearch.context'
-import { useAirportSearchContext } from '../../context/airportSearch.context'
-import SelectTripType from '../../../../components/SelectTripType/SelectTripType'
-import SelectPassengerCount from '../../../../components/SelectPassengerCount/SelectPassengerCount'
-import SelectSeatClass from '../../../../components/SelectSeatClass/SelectSeatClass'
-import SelectAirportFields from '../../../../components/SelectAirportFields/SelectAirportFields'
-import SelectFlightDates from '../../../../components/SelectFlightDates/SelectFlightDates'
-import SearchButton from '../../../../components/SearchButton/SearchButton'
-import { useFlightSearchResults } from '../../context/flightSearchResult.context'
-import type { TripType, SeatClass, AirportOption } from '../../context/types'
+import { useFlightSearchState, useFlightSearchDispatch } from '@context/flightSearch.context'
+import { useAirportSearchContext } from '@context/airportSearch.context'
+import { useFlightSearchResults } from '@context/flightSearchResult.context'
+import type { TripType, SeatClass, AirportOption } from '@context/types'
+
+import SelectTripType from '@components/SelectTripType/SelectTripType'
+import SelectPassengerCount from '@components/SelectPassengerCount/SelectPassengerCount'
+import SelectSeatClass from '@components/SelectSeatClass/SelectSeatClass'
+import SelectAirportFields from '@components/SelectAirportFields/SelectAirportFields'
+import SelectFlightDates from '@components/SelectFlightDates/SelectFlightDates'
+import SearchButton from '@components/SearchButton/SearchButton'
+
+import { GlowBox } from '@common/Loader/GlowingLoader'
 import { useCallback, useMemo } from 'react'
-import { GlowBox } from '../../../../components/common/Loader/GlowingLoader'
 
 const FlightSearchForm = () => {
   const state = useFlightSearchState()

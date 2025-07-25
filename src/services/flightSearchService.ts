@@ -1,5 +1,5 @@
-import type { FlightSearchState } from "../features/FlightSearch/context/types"
-import { buildFlightSearchQuery } from "../utils/buildFlightSearchQuery"
+import type { FlightSearchState } from "@feature/FlightSearch/context/types"
+import { buildFlightSearchQuery } from "@utils/buildFlightSearchQuery"
 
 export async function searchFlights(state: FlightSearchState): Promise<any> {
   const queryString = buildFlightSearchQuery(state)

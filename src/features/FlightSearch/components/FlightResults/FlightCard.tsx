@@ -1,5 +1,5 @@
 import { Box, Stack, Typography } from '@mui/material'
-import type { FlightResult } from '../../context/types'
+import type { FlightResult } from '@context/types'
 
 const FlightCard = ({ flight }: { flight: FlightResult }) => {
   return (

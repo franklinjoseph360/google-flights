@@ -10,7 +10,7 @@ import {
   ListItemText,
 } from '@mui/material'
 import { useState } from 'react'
-import type { SeatClass } from '../../features/FlightSearch/context/types'
+import type { SeatClass } from '@feature/FlightSearch/context/types'
 
 
 type Props = {

@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material'
-import { useFlightSearchResults } from '../../context/flightSearchResult.context'
+import { useFlightSearchResults } from '@context/flightSearchResult.context'
 import FlightCard from './FlightCard'
 
 const FlightResult = () => {

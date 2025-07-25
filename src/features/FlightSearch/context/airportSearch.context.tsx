@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useCallback } from 'react'
 import debounce from 'lodash.debounce'
-import { fetchAirportOptions } from '../../../services/airportSearchService'
+import { fetchAirportOptions } from '@services/airportSearchService'
 import type { AirportOption } from './types'
 
 interface AirportSearchContextType {

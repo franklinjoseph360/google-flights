@@ -12,7 +12,7 @@ import {
   ListItemText,
 } from '@mui/material'
 import { useState } from 'react'
-import type { TripType } from '../../features/FlightSearch/context/types'
+import type { TripType } from '@feature/FlightSearch/context/types'
 
 type Props = {
   value: TripType

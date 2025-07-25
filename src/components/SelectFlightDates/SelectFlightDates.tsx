@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
-import DatePicker from '../common/DatePicker/DatePicker'
-import CustomDateRangePicker from '../common/CustomDateRangePicker/CustomDateRangePicker'
+import DatePicker from '@common/DatePicker/DatePicker'
+import CustomDateRangePicker from '@common/CustomDateRangePicker/CustomDateRangePicker'
 
 type Props = {
   tripType: string

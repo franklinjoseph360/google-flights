@@ -3,5 +3,20 @@
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ]
+  ],
+  "compilerOptions": {
+    "types": ["node"],
+    "moduleResolution": "node",
+    "target": "ESNext",
+    "module": "ESNext",
+    "baseUrl": "src",
+    "paths": {
+      "@components/*": ["components/*"],
+      "@common/*": ["components/common/*"],
+      "@context/*": ["features/FlightSearch/context/*"],
+      "@services/*": ["services/*"],
+      "@utils/*": ["utils/*"],
+      "@feature/*": ["features/*"]
+    }
+  },
 }
