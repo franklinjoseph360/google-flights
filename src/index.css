@@ -98,3 +98,43 @@ button:focus-visible {
   background: #8ab4f8 !important;
   color: #000 !important;
 }
+
+/* index.css or any global stylesheet */
+.custom-google-datepicker {
+  --drp-background: #202124;
+  --drp-highlight: #8ab4f8;
+  --drp-text: #ffffff;
+  --drp-muted: #9aa0a6;
+}
+
+.custom-google-datepicker .MuiTypography-root {
+  color: var(--drp-text);
+}
+
+.custom-google-datepicker .rdrDateRangePickerWrapper {
+  background-color: var(--drp-background);
+  border-radius: 10px;
+}
+
+.custom-google-datepicker .rdrDayNumber span {
+  color: var(--drp-text);
+}
+
+.custom-google-datepicker .rdrDayNumber span.rdrDayDisabled {
+  color: var(--drp-muted);
+}
+
+.custom-google-datepicker .rdrDay.rdrDayToday .rdrDayNumber span {
+  border-color: var(--drp-highlight);
+}
+
+.custom-google-datepicker .rdrStartEdge,
+.custom-google-datepicker .rdrEndEdge,
+.custom-google-datepicker .rdrInRange {
+  background-color: var(--drp-highlight);
+}
+
+.custom-google-datepicker .rdrDay.rdrSelected,
+.custom-google-datepicker .rdrDay.rdrInRange {
+  border-radius: 100%;
+}
