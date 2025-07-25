@@ -4,7 +4,7 @@ const theme = createTheme({
     palette: {
         mode: 'dark',
         background: {
-            default: '#202124',
+            default: '#2b2b2b',
             paper: '#202124',
         },
         primary: {
@@ -27,13 +27,13 @@ const theme = createTheme({
         borderRadius: 8,
     },
     components: {
-        MuiCssBaseline: {
-            styleOverrides: {
-                body: {
-                    backgroundColor: '#202124',
-                },
-            },
-        },
+        // MuiCssBaseline: {
+        //     styleOverrides: {
+        //         body: {
+        //             backgroundColor: '#202124',
+        //         },
+        //     },
+        // },
         MuiInput: {
             styleOverrides: {
                 root: {
