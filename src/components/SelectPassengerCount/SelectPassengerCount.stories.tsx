@@ -1,32 +1,18 @@
-// SelectPassengerCount.stories.tsx
-
-import type { Meta, StoryObj } from '@storybook/react'
-import { useState } from 'react'
 import SelectPassengerCount from './SelectPassengerCount'
+import { useState } from 'react'
 
-const meta: Meta<typeof SelectPassengerCount> = {
+export default {
   title: 'Components/SelectPassengerCount',
   component: SelectPassengerCount,
-  tags: ['autodocs'],
 }
 
-export default meta
-type Story = StoryObj<typeof SelectPassengerCount>
+export const Default = () => {
+  const [value, setValue] = useState({
+    adults: 1,
+    children: 0,
+    infantsInSeat: 0,
+    infantsOnLap: 0,
+  })
 
-export const Default: Story = {
-  render: () => {
-    const [value, setValue] = useState({
-      adults: 1,
-      children: 0,
-      infantsInSeat: 0,
-      infantsOnLap: 0,
-    })
-
-    return (
-      <SelectPassengerCount
-        value={value}
-        onChange={setValue}
-      />
-    )
-  },
+  return <SelectPassengerCount value={value} onChange={setValue} />
 }
