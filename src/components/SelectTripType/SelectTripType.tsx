@@ -12,14 +12,14 @@ import {
   ListItemText,
 } from '@mui/material'
 import { useState } from 'react'
+import type { TripType } from '../../features/FlightSearch/context/types'
 
-type Option = { label: string; value: string | number }
-
-interface Props {
-  value: string | number
-  onChange: (value: string | number) => void
-  options: Option[]
+type Props = {
+  value: TripType
+  onChange: (value: TripType) => void
+  options: { label: string; value: TripType }[]
 }
+
 
 export default function SelectTripType({ value, onChange, options }: Props) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
