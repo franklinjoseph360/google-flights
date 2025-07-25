@@ -1,10 +1,11 @@
 import './App.css'
-import FlightSearchForm from './features/FlightSearch/components/FlightSearchForm'
+import FlightResult from './features/FlightSearch/components/FlightResults/FlightResult'
+import FlightSearchForm from './features/FlightSearch/components/FlightSearch/FlightSearchForm'
 import { AirportSearchProvider } from './features/FlightSearch/context/airportSearch.context'
 import { FlightSearchProvider } from './features/FlightSearch/context/flightSearch.context'
+import { FlightSearchResultProvider } from './features/FlightSearch/context/flightSearchResult.context'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
-import { FlightSearchResultProvider } from './features/FlightSearch/context/flightSearchResult.context'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <FlightSearchResultProvider>
             <AirportSearchProvider>
               <FlightSearchForm />
+              <FlightResult />
             </AirportSearchProvider>
           </FlightSearchResultProvider>
         </FlightSearchProvider>
