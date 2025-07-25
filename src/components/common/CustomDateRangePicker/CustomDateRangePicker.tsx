@@ -11,18 +11,33 @@ import EventIcon from '@mui/icons-material/Event'
 import { DateRangePicker } from 'mui-daterange-picker'
 import type { DateRange } from 'mui-daterange-picker'
 
-export default function CustomDateRangePicker() {
+type Props = {
+  startDate: Date | null
+  endDate: Date | null
+  onStartDateChange: (date: Date | null) => void
+  onEndDateChange: (date: Date | null) => void
+}
+
+export default function CustomDateRangePicker({
+  startDate,
+  endDate,
+  onStartDateChange,
+  onEndDateChange,
+}: Props) {
   const [open, setOpen] = useState(false)
-  const [range, setRange] = useState<DateRange>({})
+  const [range, setRange] = useState<DateRange>({
+    startDate: startDate ?? undefined,
+    endDate: endDate ?? undefined,
+  })
   const anchorRef = useRef<HTMLDivElement | null>(null)
 
   const toggle = () => setOpen((prev) => !prev)
 
   const handleChange = (newRange: DateRange) => {
     setRange(newRange)
-    if (newRange.startDate && newRange.endDate) {
-      setOpen(false)
-    }
+    if (newRange.startDate) onStartDateChange(newRange.startDate)
+    if (newRange.endDate) onEndDateChange(newRange.endDate)
+    if (newRange.startDate && newRange.endDate) setOpen(false)
   }
 
   const formatDisplay = () => {
@@ -39,6 +54,14 @@ export default function CustomDateRangePicker() {
     document.addEventListener('keydown', escListener)
     return () => document.removeEventListener('keydown', escListener)
   }, [])
+
+  // Sync props to local state when props change
+  useEffect(() => {
+    setRange({
+      startDate: startDate ?? undefined,
+      endDate: endDate ?? undefined,
+    })
+  }, [startDate, endDate])
 
   return (
     <ClickAwayListener onClickAway={() => setOpen(false)}>
