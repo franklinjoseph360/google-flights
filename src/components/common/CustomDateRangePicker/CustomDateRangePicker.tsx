@@ -16,6 +16,7 @@ type Props = {
   endDate: Date | null
   onStartDateChange: (date: Date | null) => void
   onEndDateChange: (date: Date | null) => void
+  placeholder?: string
 }
 
 export default function CustomDateRangePicker({
@@ -23,6 +24,7 @@ export default function CustomDateRangePicker({
   endDate,
   onStartDateChange,
   onEndDateChange,
+  placeholder
 }: Props) {
   const [open, setOpen] = useState(false)
   const [range, setRange] = useState<DateRange>({
@@ -69,15 +71,17 @@ export default function CustomDateRangePicker({
         <TextField
           onClick={toggle}
           value={formatDisplay()}
-          placeholder="MM/DD/YYYY"
+          placeholder={placeholder}
           fullWidth
           variant="outlined"
           InputProps={{
             readOnly: true,
             sx: {
-              backgroundColor: '#202124',
-              borderRadius: '8px',
-              input: { color: '#fff', padding: 0 },
+              backgroundColor: '#2b2b2b',
+              borderRadius: '6px',
+              border: '1px solid transparent',
+              padding: '8px 12px',
+              input: { color: '#fff', padding: '4px 4px 4px 0' },
               '& .MuiOutlinedInput-notchedOutline': {
                 border: 'none',
               },
