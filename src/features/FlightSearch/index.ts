@@ -1,1 +1,1 @@
-export * from './components/FlightSearchForm'
+export * from './components/FlightSearch/FlightSearchForm'

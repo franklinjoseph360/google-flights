@@ -9,8 +9,18 @@ export const initialFlightSearchState: FlightSearchState = {
     infantsInSeat: 0,
   },
   seatClass: 'economy',
-  from: null,
-  to: null,
+  from: {
+    skyId: 'NYCA',
+    entityId: '27537542',
+    value: 'NYCA',
+    label: 'New York'
+  },
+  to: {
+    skyId: 'LOND',
+    entityId: '27544008',
+    value: 'LOND',
+    label: 'London'
+  },
   departureDate: new Date(),
   returnDate: null,
 }
