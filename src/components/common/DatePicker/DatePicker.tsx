@@ -22,9 +22,11 @@ const DatePicker = ({ value, onChange, placeholder }: Props) => {
             disableUnderline: true,
           },
           sx: {
-            backgroundColor: '#202124',
-            borderRadius: '8px',
-            input: { color: '#fff' },
+            backgroundColor: '#2b2b2b',
+            borderRadius: '6px',
+            border: '1px solid transparent',
+            padding: '8px 12px',
+            input: { color: '#fff', padding: '4px 4px 4px 0' },
             '& .MuiInputBase-root:before': {
               borderBottom: 'none',
             },
