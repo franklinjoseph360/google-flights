@@ -25,12 +25,13 @@ const SelectFlightDates = ({
           endDate={returnDate || null}
           onStartDateChange={onDepartureChange}
           onEndDateChange={onReturnChange}
+          placeholder="Departure-Return"
         />
       ) : (
         <DatePicker
           value={departureDate}
           onChange={onDepartureChange}
-          placeholder="Departure Date"
+          placeholder="Departure"
         />
       )}
     </Box>
