@@ -9,17 +9,33 @@ export async function searchFlights(state: FlightSearchState): Promise<any> {
     return null
   }
 
+  let endpoint = ''
+  switch (state.tripType) {
+    case 'oneway':
+      endpoint = '/flights/search-one-way'
+      break
+    case 'roundtrip':
+      endpoint = '/flights/search-roundtrip'
+      break
+    case 'multicity':
+      endpoint = '/flights/search-multi-city'
+      break
+    default:
+      console.warn(`Unsupported trip type: ${state.tripType}`)
+      return null
+  }
+
+  const baseHost = import.meta.env.VITE_FLIGHTS_APP_RAPIDAPI_FLIGHTS_HOST
+  const apiKey = import.meta.env.VITE_FLIGHTS_APP_RAPIDAPI_KEY
+
   try {
-    const response = await fetch(
-      `https://sky-scrapper.p.rapidapi.com/api/v1/flights/searchFlights?${queryString}`,
-      {
-        method: 'GET',
-        headers: {
-          'x-rapidapi-key': import.meta.env.VITE_FLIGHTS_APP_RAPIDAPI_KEY,
-          'x-rapidapi-host': import.meta.env.VITE_FLIGHTS_APP_RAPIDAPI_HOST,
-        },
-      }
-    )
+    const response = await fetch(`https://${baseHost}${endpoint}?${queryString}`, {
+      method: 'GET',
+      headers: {
+        'x-rapidapi-key': apiKey,
+        'x-rapidapi-host': baseHost,
+      },
+    })
 
     const result = await response.json()
 
