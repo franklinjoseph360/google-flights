@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 import SelectTripType from './SelectTripType'
+import type { TripType } from '@context/types'
 
-const tripTypeOptions = [
+const tripTypeOptions: { label: string; value: TripType }[] = [
   { label: 'One-way', value: 'oneway' },
   { label: 'Round-trip', value: 'roundtrip' },
   { label: 'Multi-city', value: 'multicity' },
@@ -19,7 +20,7 @@ type Story = StoryObj<typeof SelectTripType>
 
 export const Default: Story = {
   render: () => {
-    const [value, setValue] = useState<string | number>('oneway')
+    const [value, setValue] = useState<TripType>('oneway')
 
     return (
       <SelectTripType

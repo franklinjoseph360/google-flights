@@ -32,6 +32,7 @@ export const Default: Story = {
           tripType={tripType}
           departureDate={departureDate}
           onDepartureChange={setDepartureDate}
+          onReturnChange={() => { }}
         />
       </div>
     )

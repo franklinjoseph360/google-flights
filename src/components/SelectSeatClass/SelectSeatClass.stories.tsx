@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 import SelectSeatClass from './SelectSeatClass'
+import type { SeatClass } from '@context/types'
 
 const seatClassOptions = [
   { label: 'Economy', value: 'economy' },
@@ -20,13 +21,13 @@ type Story = StoryObj<typeof SelectSeatClass>
 
 export const Default: Story = {
   render: () => {
-    const [value, setValue] = useState<string | number>('economy')
+    const [value, setValue] = useState<SeatClass>('economy')
 
     return (
       <SelectSeatClass
         value={value}
         onChange={setValue}
-        options={seatClassOptions}
+        options={seatClassOptions as { label: string; value: SeatClass }[]}
       />
     )
   },

@@ -1,13 +1,39 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 import SelectAirportFields from './SelectAirportFields'
+import type { AirportOption } from '@context/types'
 
-const airportOptions = [
-    { label: 'Singapore Changi Airport (SIN)', value: 'SIN' },
-    { label: 'Kuala Lumpur International Airport (KUL)', value: 'KUL' },
-    { label: 'Bangkok Suvarnabhumi (BKK)', value: 'BKK' },
-    { label: 'Tokyo Haneda (HND)', value: 'HND' },
-    { label: 'Sydney Kingsford Smith (SYD)', value: 'SYD' },
+const airportOptions: AirportOption[] = [
+  {
+    label: 'Singapore Changi Airport (SIN)',
+    value: 'SIN',
+    skyId: 'SIN123',
+    entityId: 'airport:sin',
+  },
+  {
+    label: 'Kuala Lumpur International Airport (KUL)',
+    value: 'KUL',
+    skyId: 'KUL123',
+    entityId: 'airport:kul',
+  },
+  {
+    label: 'Bangkok Suvarnabhumi (BKK)',
+    value: 'BKK',
+    skyId: 'BKK123',
+    entityId: 'airport:bkk',
+  },
+  {
+    label: 'Tokyo Haneda (HND)',
+    value: 'HND',
+    skyId: 'HND123',
+    entityId: 'airport:hnd',
+  },
+  {
+    label: 'Sydney Kingsford Smith (SYD)',
+    value: 'SYD',
+    skyId: 'SYD123',
+    entityId: 'airport:syd',
+  },
 ]
 
 const meta: Meta<typeof SelectAirportFields> = {
@@ -21,8 +47,8 @@ type Story = StoryObj<typeof SelectAirportFields>
 
 export const Default: Story = {
     render: () => {
-        const [from, setFrom] = useState<{ label: string; value: string } | null>(airportOptions[0])
-        const [to, setTo] = useState<{ label: string; value: string } | null>(airportOptions[1])
+        const [from, setFrom] = useState<AirportOption | null>(airportOptions[0])
+        const [to, setTo] = useState<AirportOption | null>(airportOptions[1])
 
 
         return (
