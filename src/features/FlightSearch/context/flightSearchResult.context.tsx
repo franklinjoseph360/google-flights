@@ -1,10 +1,21 @@
-import React, { createContext, useContext, useState, useCallback, useMemo } from 'react'
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  useMemo,
+} from 'react'
 import { searchFlights } from '../../../services/flightSearchService'
 import type { FlightResult, FlightSearchState } from './types'
 import { parseFlightCards } from '../../../utils/parseFlightResults'
 
+interface NormalizedFlightResults {
+  cheapest: FlightResult[]
+  best: FlightResult[]
+}
+
 interface FlightSearchResultContextType {
-  flightSearchResults: FlightResult[]
+  flightSearchResults: NormalizedFlightResults | null
   isLoading: boolean
   error: string | null
   searchFlightsNow: (state: FlightSearchState) => Promise<void>
@@ -14,7 +25,7 @@ interface FlightSearchResultContextType {
 const FlightSearchResultContext = createContext<FlightSearchResultContextType | undefined>(undefined)
 
 export const FlightSearchResultProvider = ({ children }: { children: React.ReactNode }) => {
-  const [flightSearchResults, setResults] = useState<FlightResult[]>([])
+  const [flightSearchResults, setResults] = useState<NormalizedFlightResults | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -24,7 +35,7 @@ export const FlightSearchResultProvider = ({ children }: { children: React.React
 
     try {
       const response = await searchFlights(state)
-      const parsedFlightResults = parseFlightCards(response)
+      const parsedFlightResults = parseFlightCards(response) // returns { cheapest: [], best: [] }
       setResults(parsedFlightResults)
     } catch (err) {
       console.error(err)
@@ -35,7 +46,7 @@ export const FlightSearchResultProvider = ({ children }: { children: React.React
   }, [])
 
   const clearResults = useCallback(() => {
-    setResults([])
+    setResults(null)
     setError(null)
   }, [])
 
@@ -56,6 +67,8 @@ export const FlightSearchResultProvider = ({ children }: { children: React.React
 
 export const useFlightSearchResults = () => {
   const context = useContext(FlightSearchResultContext)
-  if (!context) throw new Error('useFlightSearchResults must be used within a FlightSearchResultProvider')
+  if (!context) {
+    throw new Error('useFlightSearchResults must be used within a FlightSearchResultProvider')
+  }
   return context
 }
